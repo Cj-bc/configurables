@@ -1,0 +1,9 @@
+{
+    "name": "com.github.cj-bc.configurables",
+    "version": "0.0.1",
+    "displayName": "Configurables",
+    "dependencies": {
+        "com.cysharp.unitask": "2.5.10"
+    }
+
+}
