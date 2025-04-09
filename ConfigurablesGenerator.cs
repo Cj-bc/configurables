@@ -19,7 +19,7 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
             .Collect()
             .SelectMany(static (contexts, token) => {
                 token.ThrowIfCancellationRequested();
-                return contexts.Distinct();
+                return contexts.Distinct(SymbolEqualityComparer.Default).Cast<INamedTypeSymbol>();
             });
 
         context.RegisterSourceOutput(source, Emit);
