@@ -3,7 +3,7 @@ namespace Configurables;
 using System;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-public sealed class ConfigurableAttribtue : Attribute
+public sealed class ConfigurableAttribute : Attribute
 {
-    public ConfigurableAttribtue() {}
+    public ConfigurableAttribute() {}
 }

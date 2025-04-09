@@ -9,7 +9,7 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
     {
         var source = context.SyntaxProvider.ForAttributeWithMetadataName(
             // target Attribute name
-            "Configurables.ConfigurableAttribtue",
+            "Configurables.ConfigurableAttribute",
             static (node, token) => true,
             static (context, token) => context);
 
