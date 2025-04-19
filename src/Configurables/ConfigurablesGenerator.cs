@@ -7,6 +7,24 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+        context.RegisterPostInitializationOutput(static context =>
+        {
+            context.AddSource("ConfigurableAttribute.cs", """
+using System;
+
+namespace Configurables
+{
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public sealed class ConfigurableAttribute : Attribute
+    {
+        public ConfigurableAttribute() {}
+    }
+}
+
+
+""");
+        });
+
         var source = context.SyntaxProvider.ForAttributeWithMetadataName(
             // target Attribute name
             "Configurables.ConfigurableAttribute",
