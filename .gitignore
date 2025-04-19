@@ -1,7 +1,9 @@
 *~
 
-Library
-Logs
-.vscode
-UserSettings
-Temp
+src/ConfigurablesSample/Library
+src/ConfigurablesSample/Logs
+src/ConfigurablesSample/.vscode
+src/ConfigurablesSample/UserSettings
+src/ConfigurablesSample/Temp
+src/ConfigurablesSample/*.csproj
+src/ConfigurablesSample/*.sln
