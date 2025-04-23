@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Configurables;
@@ -57,6 +58,7 @@ namespace Configurables
             });
 
         context.RegisterSourceOutput(source, Emit);
+        context.RegisterSourceOutput(source.Collect(), CreateConfigSystem);
 
     }
 
@@ -99,5 +101,18 @@ namespace Configurables
                           {{(isGlobalNamespace ? "" : "}")}}
 
                           """);
+    }
+
+    private static void CreateConfigSystem(SourceProductionContext context, ImmutableArray<Target> targets)
+    {
+        var configSystemBase = $$"""
+            using UnityEngine;
+
+            public partial class ConfigSystem
+            {
+                {{string.Join("\n", targets.Select(t => $"[SerializeField] private {t.ClassSymbol.Name} m_{t.ClassSymbol.Name};"))}}
+            }
+            """;
+        context.AddSource("ConfigSystem.g.cs", configSystemBase);
     }
 }
