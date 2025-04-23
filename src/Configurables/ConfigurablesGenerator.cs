@@ -110,7 +110,13 @@ namespace Configurables
 
             public partial class ConfigSystem
             {
-                {{string.Join("\n", targets.Select(t => $"[SerializeField] private {t.ClassSymbol.Name} m_{t.ClassSymbol.Name};"))}}
+                {{string.Join("\n", targets.Select(t => $"[SerializeField] private IConfigProvider<{t.ClassSymbol.Name}.Config> m_ConfigProviderFor{t.ClassSymbol.Name};\n"
+                                                   + "[SerializeField] private {t.ClassSymbol.Name} m_{t.ClassSymbol.Name};"))}}
+
+                public void Configure()
+                {
+                    {{string.Join("\n", targets.Select(t => $"m_{t.ClassSymbol.Name}.Configure(m_ConfigProviderFor{t.ClassSymbol.Name}.GetConfig());"))}}
+                }
             }
             """;
         context.AddSource("ConfigSystem.g.cs", configSystemBase);
