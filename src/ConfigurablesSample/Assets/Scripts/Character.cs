@@ -3,11 +3,11 @@ using Configurables;
 
 public partial class Character : MonoBehaviour
 {
-    [Configurable] private int m_MaxHealth;
-    [Configurable] private float m_WalkSpeed;
+    [Configurable] public int m_MaxHealth;
+    [Configurable] public float m_WalkSpeed;
 
     void Start()
     {
-        AddedLog();
+        Configure(new(10, 1.0f));
     }
 }
