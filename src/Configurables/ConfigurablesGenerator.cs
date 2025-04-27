@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -69,6 +70,26 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(source, Emit);
         context.RegisterSourceOutput(source.Collect(), CreateConfigSystem);
+
+        var configProviders = context.SyntaxProvider.CreateSyntaxProvider(
+            static (node, token) => node.IsKind(SyntaxKind.ClassDeclaration),
+            static (context, token) => (INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node))
+            .Where(sym => sym is not null)
+            .Where(static (symbol) =>
+            {
+                var nameOnlyDisplayFormat = new SymbolDisplayFormat(); // display name only
+
+                foreach (INamedTypeSymbol _interface in ((INamedTypeSymbol)symbol).Interfaces)
+                {
+                    if (_interface.Name == "IConfigProvider")
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            })
+            // .Select(static context => context.);
+        ;
 
     }
 
