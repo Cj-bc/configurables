@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.github.cj-bc.configurables": {
+      "version": "file:com.github.cj-bc.configurables",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.8.19",
       "depth": 2,

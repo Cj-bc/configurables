@@ -1,0 +1,15 @@
+{
+  "name": "com.github.cj-bc.configurables",
+  "version": "0.1.0",
+  "displayName": "Configurables",
+  "description": "Makes your fileds/properties configurable via config file and runtime with less work ",
+  "unity": "2022.3",
+  "dependencies": {
+  },
+  "author": {
+    "name": "Cj-bc",
+    "email": "cj.bc-sd@outlook.jp",
+      "url": "https://github.com/Cj-bc"
+  }
+}
+    
