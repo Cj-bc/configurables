@@ -41,16 +41,6 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
                               """);
         });
 
-        context.RegisterPostInitializationOutput(static context =>
-        {
-            context.AddSource("IConfigProvider.g.cs", """
-                              public interface IConfigProvider
-                              {
-                                  public ConfigSystem.Config GetConfig();
-                              }
-                              """);
-        });
-
         var source = context.SyntaxProvider.ForAttributeWithMetadataName(
             // target Attribute name
             "Configurables.ConfigurableAttribute",
