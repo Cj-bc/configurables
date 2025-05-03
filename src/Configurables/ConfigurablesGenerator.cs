@@ -129,6 +129,8 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
         var configSystemBase = $$"""
             using UnityEngine;
 
+        namespace Configurables
+        {
             public partial class ConfigSystem
             {
                 public struct Config
@@ -145,7 +147,8 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
                     {{string.Join("\n", targets.Select(t => $"m_{t.ClassSymbol.Name}.Configure(config.{t.ClassSymbol.Name});"))}}
                 }
             }
-            """;
+        }
+        """;
         context.AddSource("ConfigSystem.g.cs", configSystemBase);
     }
 }

@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using Configurables;
 
 public class JsonConfigProvider : IConfigProvider
 {

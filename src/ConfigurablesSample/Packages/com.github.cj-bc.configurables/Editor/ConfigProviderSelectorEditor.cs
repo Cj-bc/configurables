@@ -3,8 +3,10 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-/// https://docs.unity3d.com/ja/2022.3/ScriptReference/TypeCache.GetTypesDerivedFrom.html
-/// https://light11.hatenadiary.com/entry/2021/04/26/202054
+namespace Configurables
+{
+    /// https://docs.unity3d.com/ja/2022.3/ScriptReference/TypeCache.GetTypesDerivedFrom.html
+    /// https://light11.hatenadiary.com/entry/2021/04/26/202054
 
 [CustomPropertyDrawer(typeof(ConfigProviderSelector))]
 internal class ConfigProviderSelectorEditor : PropertyDrawer
@@ -15,4 +17,6 @@ internal class ConfigProviderSelectorEditor : PropertyDrawer
         return container;
 
     }
+}
+
 }
