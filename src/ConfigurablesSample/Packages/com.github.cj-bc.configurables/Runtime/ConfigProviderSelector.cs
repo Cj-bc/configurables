@@ -2,11 +2,9 @@ using System;
 
 namespace Configurables
 {
-[Serializable]
-internal class ConfigProviderSelector
-{
-    public IConfigProvider ConfigProvider;
-}
-
-
+    [Serializable]
+    public class ConfigProviderSelector
+    {
+        public IConfigProvider ConfigProvider;
+    }
 }

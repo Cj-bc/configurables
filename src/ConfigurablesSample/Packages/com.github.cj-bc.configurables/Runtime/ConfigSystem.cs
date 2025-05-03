@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace Configurables
 {
-public partial class ConfigSystem : MonoBehaviour {
+    public partial class ConfigSystem : MonoBehaviour {
 
-    void Start()
-    {
-        m_ConfigProvider = new JsonConfigProvider();
+        void Start()
+        {
+            m_ConfigProvider = new JsonConfigProvider();
+        }
     }
-}
-
 }
