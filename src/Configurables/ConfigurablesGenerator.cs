@@ -54,6 +54,18 @@ public partial class ConfigurablesGenerator : IIncrementalGenerator
             """);
         });
 
+        context.RegisterPostInitializationOutput(static context =>
+        {
+            context.AddSource("ConfigSystem.Core.g.cs", """
+            namespace Configurables
+            {
+                public partial class ConfigSystem
+                {
+                }
+            }
+            """);
+        });
+
         var source = context.SyntaxProvider.ForAttributeWithMetadataName(
             // target Attribute name
             "Configurables.ConfigurableAttribute",
