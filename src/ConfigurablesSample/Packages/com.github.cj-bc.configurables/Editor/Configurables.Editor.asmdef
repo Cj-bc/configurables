@@ -1,3 +1,16 @@
 {
-	"name": "Configurables.Editor"
+    "name": "Configurables.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:60c5b88e498339c468d40499ea181358"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
