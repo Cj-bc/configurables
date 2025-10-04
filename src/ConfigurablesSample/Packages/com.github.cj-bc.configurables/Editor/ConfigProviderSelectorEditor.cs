@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -15,12 +16,14 @@ internal class ConfigProviderSelectorEditor : PropertyDrawer
 {
     public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
+        var rawObject = property.FindPropertyRelative("rawObject");
         var container = new VisualElement();
 
         var foundProviders = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes())
             .Where(t => t.IsClass && t.GetInterfaces().Select(i => i.Name).Contains(typeof(IConfigProvider).Name));
 
-        var selector = new DropdownField("IConfigProvider", foundProviders.Select(t => t.ToString()).Prepend("None").ToList(), "None", a => a, a => a);
+        var selector = new DropdownField("IConfigProvider", foundProviders.Select(t => t.ToString()).Prepend("None").ToList(),
+                                         rawObject is IConfigProvider serializedProvider ? serializedProvider.GetType().Name : "None", a => a, a => a);
         container.Add(selector);
         return container;
     }
