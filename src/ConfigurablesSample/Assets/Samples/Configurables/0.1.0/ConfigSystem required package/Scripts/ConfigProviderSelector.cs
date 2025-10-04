@@ -9,8 +9,11 @@ namespace Configurables
         public IConfigProvider ConfigProvider
         {
             set {
-                if (value is IConfigProvider provider) rawObject = value;
-                OnValueChanged?.Invoke(value);
+                if (value is IConfigProvider provider)
+                {
+                    rawObject = value;
+                    OnValueChanged?.Invoke(value);
+                }
             }
             get => rawObject as IConfigProvider;
         }
