@@ -25,7 +25,7 @@ internal class ConfigProviderSelectorEditor : PropertyDrawer
         Dictionary<string, Type> nameToType = foundProviders.ToDictionary(t => t.ToString());
 
         var selector = new DropdownField("IConfigProvider", foundProviders.Select(t => t.ToString()).Prepend("None").ToList(),
-                                         rawObject.boxedValue is null ? "None" : rawObject.GetType().Name, a => a, a => a);
+                                         rawObject.boxedValue is null ? "None" : rawObject.boxedValue.GetType().Name, a => a, a => a);
         selector.RegisterValueChangedCallback(ev =>
         {
             rawObject.boxedValue = nameToType.TryGetValue(ev.newValue, out Type t) ? Activator.CreateInstance(t) : null;
