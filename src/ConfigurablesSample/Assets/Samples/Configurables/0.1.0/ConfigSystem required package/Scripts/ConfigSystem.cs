@@ -8,7 +8,8 @@ namespace Configurables
 
         void Start()
         {
-            m_ConfigProvider = new JsonConfigProvider();
+            m_ConfigSelector.OnValueChanged += p => m_ConfigProvider = p;
+            m_ConfigProvider = m_ConfigSelector.ConfigProvider;
         }
     }
 }
