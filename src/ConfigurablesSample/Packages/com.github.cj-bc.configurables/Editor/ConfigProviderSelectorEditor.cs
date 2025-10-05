@@ -29,6 +29,7 @@ internal class ConfigProviderSelectorEditor : PropertyDrawer
         selector.RegisterValueChangedCallback(ev =>
         {
             rawObject.boxedValue = nameToType.TryGetValue(ev.newValue, out Type t) ? Activator.CreateInstance(t) : null;
+            property.serializedObject.ApplyModifiedProperties();
         });
 
         container.Add(selector);
