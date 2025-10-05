@@ -14,21 +14,21 @@ namespace Configurables
 [CustomPropertyDrawer(typeof(ConfigProviderSelector))]
 internal class ConfigProviderSelectorEditor : PropertyDrawer
 {
+    private static Dictionary<string, Type> providersCache = AppDomain.CurrentDomain
+        .GetAssemblies().SelectMany(asm => asm.GetTypes())
+        .Where(t => t.IsClass && t.GetInterfaces().Select(i => i.Name).Contains(typeof(IConfigProvider).Name))
+        .ToDictionary(t => t.ToString());
+
     public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
         var rawObject = property.FindPropertyRelative("rawObject");
         var container = new VisualElement();
 
-        var foundProviders = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes())
-            .Where(t => t.IsClass && t.GetInterfaces().Select(i => i.Name).Contains(typeof(IConfigProvider).Name));
-
-        Dictionary<string, Type> nameToType = foundProviders.ToDictionary(t => t.ToString());
-
-        var selector = new DropdownField("IConfigProvider", foundProviders.Select(t => t.ToString()).Prepend("None").ToList(),
+        var selector = new DropdownField("IConfigProvider", providersCache.Keys.Prepend("None").ToList(),
                                          rawObject.boxedValue is null ? "None" : rawObject.boxedValue.GetType().Name, a => a, a => a);
         selector.RegisterValueChangedCallback(ev =>
         {
-            rawObject.boxedValue = nameToType.TryGetValue(ev.newValue, out Type t) ? Activator.CreateInstance(t) : null;
+            rawObject.boxedValue = providersCache.TryGetValue(ev.newValue, out Type t) ? Activator.CreateInstance(t) : null;
             property.serializedObject.ApplyModifiedProperties();
         });
 
