@@ -33,6 +33,10 @@ internal class ConfigProviderSelectorEditor : PropertyDrawer
         });
 
         container.Add(selector);
+        if (rawObject.boxedValue is not null)
+        {
+            container.Add(new PropertyField(rawObject, rawObject.boxedValue.GetType().Name));
+        }
         return container;
     }
 }
